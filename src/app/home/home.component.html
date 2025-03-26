@@ -1,0 +1,13 @@
+<div class="container mt-5 text-center">
+    <h1 class="title">Slowly</h1>
+    <p class="subtitle">Like Speedy but Slowly</p>
+  
+    <div class="button-group">
+      <button *ngIf="!isLoggedIn" routerLink="/login" class="btn btn-primary">Login</button>
+      <button *ngIf="!isLoggedIn" routerLink="/register" class="btn btn-secondary">Register</button>
+      <button routerLink="/viewOrders" class="btn btn-success">View Orders</button>
+      <button routerLink="/viewItems" class="btn btn-info">View Items</button>
+      <button *ngIf="isLoggedIn" (click)="logout()" class="btn btn-danger">Logout</button>
+    </div>
+  </div>
+  

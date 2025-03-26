@@ -1,0 +1,43 @@
+<h2>Orders for Client ID: {{ clientId }}</h2>
+
+<div style="display: flex;">
+
+  <!-- Orders Table -->
+  <table *ngIf="orders.length > 0; else noOrders" border="1" cellpadding="10" style="flex: 3;">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Order Date</th>
+        <th>Item Name</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders" 
+          [class.selected]="order.id === selectedOrderId"
+          (click)="selectOrder(order.id)">
+        <td>{{ order.id }}</td>
+        <td>{{ order.orderDate | date }}</td>
+        <td>{{ order.item.name }}</td>
+        <td>{{ order.item.description }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>${{ order.totalPrice }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Generate QR Section -->
+  <div style="flex: 1; margin-left: 20px;">
+    <button [disabled]="!selectedOrderId" (click)="generateQRCode(selectedOrderId)">
+      Generate QR Code
+    </button>
+    <p *ngIf="!selectedOrderId">Select an order to enable QR generation</p>
+  </div>
+
+</div>
+
+<ng-template #noOrders>
+  <p>No orders found.</p>
+</ng-template>
