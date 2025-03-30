@@ -1,18 +1,150 @@
-table {
-    width: 100%;
-    border-collapse: collapse;
+.orders-container {
+  width: 100%;
+  max-width: 1200px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.orders-title {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.orders-content {
+  display: flex;
+  gap: 20px;
+}
+
+.orders-table {
+  flex: 3;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.orders-table thead {
+  background-color: #f8f9fa;
+}
+
+.orders-table th, .orders-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.orders-table th {
+  color: #495057;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.order-row {
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-row:hover {
+  background-color: #f1f3f5;
+}
+
+.order-row.selected {
+  background-color: #e9ecef;
+  font-weight: bold;
+}
+
+.price {
+  font-weight: bold;
+  color: #28a745;
+}
+
+.qr-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.qr-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.qr-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.qr-hint {
+  color: #6c757d;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.no-orders-message {
+  text-align: center;
+  color: #6c757d;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .orders-content {
+      flex-direction: column;
   }
-  
-  th, td {
-    padding: 8px 12px;
-    text-align: left;
+
+  .qr-section {
+      margin-top: 20px;
   }
-  
-  thead {
-    background-color: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  .orders-table thead {
+      display: none;
   }
-  
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
+
+  .orders-table, .orders-table tbody, .orders-table tr, .orders-table td {
+      display: block;
+      width: 100%;
   }
-  
+
+  .orders-table tr {
+      margin-bottom: 15px;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      overflow: hidden;
+  }
+
+  .orders-table td {
+      text-align: right;
+      border-bottom: none;
+      position: relative;
+      padding: 10px 15px;
+  }
+
+  .orders-table td:before {
+      content: attr(data-label);
+      position: absolute;
+      left: 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+  }
+}

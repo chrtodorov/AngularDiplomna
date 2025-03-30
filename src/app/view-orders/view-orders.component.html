@@ -1,43 +1,52 @@
-<h2>Orders for Client ID: {{ clientId }}</h2>
+<div class="page-container">
+  <div class="orders-container">
+      <h2 class="orders-title">Orders</h2>
 
-<div style="display: flex;">
+      <div class="orders-content">
+          <!-- Orders Table -->
+          <table *ngIf="orders.length > 0; else noOrders" class="orders-table">
+              <thead>
+                  <tr>
+                      <th>Order Date</th>
+                      <th>Item Name</th>
+                      <th>Description</th>
+                      <th>Quantity</th>
+                      <th>Total Price</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let order of orders" 
+                      [class.selected]="order.id === selectedOrderId"
+                      (click)="selectOrder(order.id)"
+                      class="order-row">
+                      <td>{{ order.orderDate | date:'mediumDate' }}</td>
+                      <td>{{ order.item.name }}</td>
+                      <td>{{ order.item.description }}</td>
+                      <td>{{ order.quantity }}</td>
+                      <td class="price">${{ order.totalPrice.toFixed(2) }}</td>
+                  </tr>
+              </tbody>
+          </table>
 
-  <!-- Orders Table -->
-  <table *ngIf="orders.length > 0; else noOrders" border="1" cellpadding="10" style="flex: 3;">
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Order Date</th>
-        <th>Item Name</th>
-        <th>Description</th>
-        <th>Quantity</th>
-        <th>Total Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orders" 
-          [class.selected]="order.id === selectedOrderId"
-          (click)="selectOrder(order.id)">
-        <td>{{ order.id }}</td>
-        <td>{{ order.orderDate | date }}</td>
-        <td>{{ order.item.name }}</td>
-        <td>{{ order.item.description }}</td>
-        <td>{{ order.quantity }}</td>
-        <td>${{ order.totalPrice }}</td>
-      </tr>
-    </tbody>
-  </table>
+          <!-- QR Code Section -->
+          <div class="qr-section">
+              <button 
+                  class="btn btn-primary qr-button" 
+                  [disabled]="!selectedOrderId" 
+                  (click)="generateQRCode(selectedOrderId)"
+              >
+                  Generate QR Code
+              </button>
+              <p *ngIf="!selectedOrderId" class="qr-hint">
+                  Select an order to enable QR generation
+              </p>
+          </div>
+      </div>
 
-  <!-- Generate QR Section -->
-  <div style="flex: 1; margin-left: 20px;">
-    <button [disabled]="!selectedOrderId" (click)="generateQRCode(selectedOrderId)">
-      Generate QR Code
-    </button>
-    <p *ngIf="!selectedOrderId">Select an order to enable QR generation</p>
+      <ng-template #noOrders>
+          <div class="no-orders-message">
+              <p>No orders found.</p>
+          </div>
+      </ng-template>
   </div>
-
 </div>
-
-<ng-template #noOrders>
-  <p>No orders found.</p>
-</ng-template>

@@ -19,6 +19,6 @@ export class HomeComponent {
   logout() {
     sessionStorage.removeItem('isLoggedIn');
     sessionStorage.removeItem('clientId');
-    this.router.navigate(['/login']);
+    window.location.href = '/';
   }
 }

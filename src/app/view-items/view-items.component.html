@@ -1,28 +1,37 @@
-<h2>Available Items</h2>
+<div class="page-container">
+  <div class="items-container">
+      <h2 class="items-title">Available Items</h2>
 
-<table border="1" cellpadding="10" style="width: 100%;">
-  <thead>
-    <tr>
-      <th>Item ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items">
-      <td>{{ item.id }}</td>
-      <td>{{ item.name }}</td>
-      <td>{{ item.description }}</td>
-      <td>${{ item.price }}</td>
-      <td>
-        <button (click)="orderItem(item.id)">Order</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+      <table class="items-table" *ngIf="items.length > 0; else noItems">
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of items" class="item-row">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.description }}</td>
+                  <td class="price">${{ item.price.toFixed(2) }}</td>
+                  <td>
+                      <button 
+                          class="btn btn-primary order-btn" 
+                          (click)="orderItem(item.id)"
+                      >
+                          Order
+                      </button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
 
-<ng-template #noItems>
-  <p>No items found.</p>
-</ng-template>
+      <ng-template #noItems>
+          <div class="no-items-message">
+              <p>No items found.</p>
+          </div>
+      </ng-template>
+  </div>
+</div>
