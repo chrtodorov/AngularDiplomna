@@ -1,0 +1,37 @@
+<div class="page-container">
+    <div class="orders-container">
+      <h2 class="orders-title">Детайли за поръчка</h2>
+  
+      <div class="orders-content">
+        <div *ngIf="order; else noOrder" class="order-details-card">
+          <div class="detail-row">
+            <span class="label">Дата на поръчката:</span>
+            <span>{{ order.orderDate | date:'mediumDate' }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Име на продукта:</span>
+            <span>{{ order.name }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Описание:</span>
+            <span>{{ order.description }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Количество:</span>
+            <span>{{ order.quantity }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Крайна цена:</span>
+            <span class="price">{{ order.totalPrice?.toFixed(2) }}лв.</span>
+          </div>
+        </div>
+  
+        <ng-template #noOrder>
+          <div class="no-orders-message">
+            <p>{{ errorMessage || 'Поръчката не е намерена.' }}</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  

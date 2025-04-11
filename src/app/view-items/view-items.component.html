@@ -1,14 +1,14 @@
 <div class="page-container">
   <div class="items-container">
-      <h2 class="items-title">Available Items</h2>
+      <h2 class="items-title">Налични продукти</h2>
 
       <table class="items-table" *ngIf="items.length > 0; else noItems">
           <thead>
               <tr>
-                  <th>Name</th>
-                  <th>Description</th>
-                  <th>Price</th>
-                  <th>Action</th>
+                  <th>Име</th>
+                  <th>Описание</th>
+                  <th>Цена</th>
+                  <th></th>
               </tr>
           </thead>
           <tbody>
@@ -21,7 +21,7 @@
                           class="btn btn-primary order-btn" 
                           (click)="orderItem(item.id)"
                       >
-                          Order
+                          Поръчай
                       </button>
                   </td>
               </tr>

@@ -1,17 +1,17 @@
 <div class="page-container">
   <div class="orders-container">
-      <h2 class="orders-title">Orders</h2>
+      <h2 class="orders-title">Поръчки</h2>
 
       <div class="orders-content">
           <!-- Orders Table -->
           <table *ngIf="orders.length > 0; else noOrders" class="orders-table">
               <thead>
                   <tr>
-                      <th>Order Date</th>
-                      <th>Item Name</th>
-                      <th>Description</th>
-                      <th>Quantity</th>
-                      <th>Total Price</th>
+                      <th>Дата на поръчката</th>
+                      <th>Име на продука</th>
+                      <th>Описание</th>
+                      <th>Количество</th>
+                      <th>Крайна цена</th>
                   </tr>
               </thead>
               <tbody>
@@ -23,24 +23,10 @@
                       <td>{{ order.item.name }}</td>
                       <td>{{ order.item.description }}</td>
                       <td>{{ order.quantity }}</td>
-                      <td class="price">${{ order.totalPrice.toFixed(2) }}</td>
+                      <td class="price">{{ order.totalPrice.toFixed(2) }}лв.</td>
                   </tr>
               </tbody>
           </table>
-
-          <!-- QR Code Section -->
-          <div class="qr-section">
-              <button 
-                  class="btn btn-primary qr-button" 
-                  [disabled]="!selectedOrderId" 
-                  (click)="generateQRCode(selectedOrderId)"
-              >
-                  Generate QR Code
-              </button>
-              <p *ngIf="!selectedOrderId" class="qr-hint">
-                  Select an order to enable QR generation
-              </p>
-          </div>
       </div>
 
       <ng-template #noOrders>
